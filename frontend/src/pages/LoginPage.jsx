@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
-import AuthImagePattern from "../components/AuthImagePattern";
-import { Link } from "react-router-dom";
 import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare } from "lucide-react";
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -10,33 +10,44 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
+
   const { login, isLoggingIn } = useAuthStore();
 
-  const handleSubmit = async (e) => {
+  const validateForm = () => {
+    if (!formData.email.trim()) return toast.error("Email is required");
+    if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format");
+    if (!formData.password) return toast.error("Password is required");
+
+    return true;
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    login(formData);
+
+    const success = validateForm();
+
+    if (success === true) login(formData);
   };
 
   return (
-    <div className="h-screen grid lg:grid-cols-2">
-      {/* Left Side - Form */}
+    <div className="min-h-screen grid lg:grid-cols-2 pt-16">
+      {/* Left side */}
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
-        <div className="w-full max-w-md space-y-8">
+        <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-lg shadow-md">
           {/* Logo */}
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
               <div
-                className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20
-              transition-colors"
+                className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
+              group-hover:bg-primary/20 transition-colors"
               >
-                <MessageSquare className="w-6 h-6 text-primary" />
+                <MessageSquare className="size-6 text-primary" />
               </div>
               <h1 className="text-2xl font-bold mt-2">Welcome Back</h1>
-              <p className="text-base-content/60">Sign in to your account</p>
+              <p className="text-base-content/60">Sign in to continue</p>
             </div>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="form-control">
               <label className="label">
@@ -44,7 +55,7 @@ const LoginPage = () => {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-base-content/40" />
+                  <Mail className="size-5 text-base-content/40" />
                 </div>
                 <input
                   type="email"
@@ -62,7 +73,7 @@ const LoginPage = () => {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-base-content/40" />
+                  <Lock className="size-5 text-base-content/40" />
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
@@ -77,9 +88,9 @@ const LoginPage = () => {
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-base-content/40" />
+                    <EyeOff className="size-5 text-base-content/40" />
                   ) : (
-                    <Eye className="h-5 w-5 text-base-content/40" />
+                    <Eye className="size-5 text-base-content/40" />
                   )}
                 </button>
               </div>
@@ -88,7 +99,7 @@ const LoginPage = () => {
             <button type="submit" className="btn btn-primary w-full" disabled={isLoggingIn}>
               {isLoggingIn ? (
                 <>
-                  <Loader2 className="h-5 w-5 animate-spin" />
+                  <Loader2 className="size-5 animate-spin" />
                   Loading...
                 </>
               ) : (
@@ -99,21 +110,34 @@ const LoginPage = () => {
 
           <div className="text-center">
             <p className="text-base-content/60">
-              Don&apos;t have an account?{" "}
+              Don’t have an account? {" "}
               <Link to="/signup" className="link link-primary">
-                Create account
+                Sign up
               </Link>
             </p>
           </div>
         </div>
       </div>
 
-      {/* Right Side - Image/Pattern */}
-      <AuthImagePattern
-        title={"Welcome back!"}
-        subtitle={"Sign in to continue your conversations and catch up with your messages."}
-      />
+      {/* Right side with illustration and message */}
+      <div className="hidden lg:flex flex-col justify-center items-center bg-white p-12 pt-16 rounded-lg shadow-md text-gray-900">
+        <h2 className="text-3xl font-semibold text-center mb-4 text-primary">
+          Stay Connected and Engaged!
+        </h2>
+        <p className="text-center text-lg mb-6 text-gray-600">
+          Join our community to engage in meaningful conversations, share updates with friends and family, and stay connected with the world.
+        </p>
+        <Link
+          to="/signup"
+          className="btn btn-primary text-lg py-3 px-6 rounded-full hover:bg-primary/90 transition-all"
+        >
+          Get Started
+        </Link>
+      </div>
+
+
     </div>
   );
 };
+
 export default LoginPage;

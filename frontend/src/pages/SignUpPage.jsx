@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare, User } from "lucide-react";
 import { Link } from "react-router-dom";
-
-import AuthImagePattern from "../components/AuthImagePattern";
 import toast from "react-hot-toast";
 
 const SignUpPage = () => {
@@ -35,16 +33,16 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2">
-      {/* left side */}
+    <div className="min-h-screen grid lg:grid-cols-2 items-center pt-16">
+      {/* Left Side - Form */}
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
-        <div className="w-full max-w-md space-y-8">
+        <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-lg shadow-md">
           {/* LOGO */}
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
               <div
                 className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
-              group-hover:bg-primary/20 transition-colors"
+                group-hover:bg-primary/20 transition-colors"
               >
                 <MessageSquare className="size-6 text-primary" />
               </div>
@@ -133,7 +131,7 @@ const SignUpPage = () => {
 
           <div className="text-center">
             <p className="text-base-content/60">
-              Already have an account?{" "}
+              Already have an account? {" "}
               <Link to="/login" className="link link-primary">
                 Sign in
               </Link>
@@ -142,13 +140,20 @@ const SignUpPage = () => {
         </div>
       </div>
 
-      {/* right side */}
+      {/* Right Side - AuthImagePattern */}
+      {/* Right Side - AuthImagePattern */}
+      <div className="hidden lg:flex flex-col items-center justify-center bg-white text-gray-900 p-12 text-center min-h-screen me-5">
+        <h2 className="text-3xl font-bold mb-4">Join Our Community</h2>
+        <p className="text-lg text-gray-600">Connect with friends, share moments, and stay in touch with your loved ones.</p>
+        <div className="mt-8 flex items-center gap-4">
+          <MessageSquare className="size-12 text-gray-900" />
+          <User className="size-12 text-gray-900" />
+          <Mail className="size-12 text-gray-900" />
+        </div>
+      </div>
 
-      <AuthImagePattern
-        title="Join our community"
-        subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
-      />
     </div>
   );
 };
+
 export default SignUpPage;
