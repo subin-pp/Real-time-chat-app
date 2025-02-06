@@ -33,125 +33,139 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-2 items-center pt-16">
-      {/* Left Side - Form */}
-      <div className="flex flex-col justify-center items-center p-6 sm:p-12">
-        <div className="w-full max-w-md space-y-8 bg-white p-8 rounded-lg shadow-md">
-          {/* LOGO */}
-          <div className="text-center mb-8">
-            <div className="flex flex-col items-center gap-2 group">
-              <div
-                className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
-                group-hover:bg-primary/20 transition-colors"
-              >
-                <MessageSquare className="size-6 text-primary" />
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 via-base-100 to-primary/5">
+      <div className="container px-4 mx-auto py-16">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-12">
+          {/* Left side - Branding */}
+          <div className="flex-1 text-center lg:text-left space-y-8 max-w-xl">
+            <div className="inline-flex items-center justify-center gap-3 px-6 py-3 rounded-2xl bg-base-200">
+              <div className="size-3 rounded-full bg-green-500 animate-pulse"></div>
+              <span className="text-sm font-medium">1,234 users online now</span>
+            </div>
+            
+            <div className="space-y-4">
+              <h2 className="text-5xl font-bold leading-tight">
+                Start chatting with your friends instantly
+              </h2>
+              <p className="text-xl text-base-content/70">
+                Create your account in seconds and join the conversation.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-6">
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-base-200">
+                <div className="p-3 bg-primary/10 rounded-xl">
+                  <MessageSquare className="size-6 text-primary" />
+                </div>
+                <div>
+                  <div className="font-semibold">Real-time Chat</div>
+                  <div className="text-sm text-base-content/60">Instant messaging</div>
+                </div>
               </div>
-              <h1 className="text-2xl font-bold mt-2">Create Account</h1>
-              <p className="text-base-content/60">Get started with your free account</p>
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-base-200">
+                <div className="p-3 bg-primary/10 rounded-xl">
+                  <User className="size-6 text-primary" />
+                </div>
+                <div>
+                  <div className="font-semibold">User Friendly</div>
+                  <div className="text-sm text-base-content/60">Easy to use</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium">Full Name</span>
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User className="size-5 text-base-content/40" />
-                </div>
-                <input
-                  type="text"
-                  className={`input input-bordered w-full pl-10`}
-                  placeholder="John Doe"
-                  value={formData.fullName}
-                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                />
+          {/* Right side - Signup Form */}
+          <div className="w-full max-w-md">
+            <div className="bg-base-100 rounded-3xl shadow-xl p-8 border border-base-200">
+              <div className="mb-8 text-center">
+                <h3 className="text-2xl font-bold">Create your account</h3>
+                <p className="text-base-content/60 mt-2">Join our community today</p>
               </div>
-            </div>
 
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium">Email</span>
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="size-5 text-base-content/40" />
-                </div>
-                <input
-                  type="email"
-                  className={`input input-bordered w-full pl-10`}
-                  placeholder="you@example.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                />
-              </div>
-            </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Full Name</label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        className="input input-bordered w-full pl-12 bg-base-200/50"
+                        placeholder="alexander"
+                        value={formData.fullName}
+                        onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                      />
+                      <User className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-base-content/40" />
+                    </div>
+                  </div>
 
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium">Password</span>
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="size-5 text-base-content/40" />
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Email Address</label>
+                    <div className="relative">
+                      <input
+                        type="email"
+                        className="input input-bordered w-full pl-12 bg-base-200/50"
+                        placeholder="you@example.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      />
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-base-content/40" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Password</label>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        className="input input-bordered w-full pl-12 pr-12 bg-base-200/50"
+                        placeholder="••••••••"
+                        value={formData.password}
+                        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                      />
+                      <Lock className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-base-content/40" />
+                      <button
+                        type="button"
+                        className="absolute right-4 top-1/2 -translate-y-1/2"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? (
+                          <EyeOff className="size-5 text-base-content/40" />
+                        ) : (
+                          <Eye className="size-5 text-base-content/40" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
                 </div>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  className={`input input-bordered w-full pl-10`}
-                  placeholder="••••••••"
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                />
-                <button
-                  type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                  onClick={() => setShowPassword(!showPassword)}
+
+                <button 
+                  type="submit" 
+                  className="btn btn-primary w-full h-12 text-lg"
+                  disabled={isSigningUp}
                 >
-                  {showPassword ? (
-                    <EyeOff className="size-5 text-base-content/40" />
+                  {isSigningUp ? (
+                    <>
+                      <Loader2 className="size-5 animate-spin" />
+                      Creating account...
+                    </>
                   ) : (
-                    <Eye className="size-5 text-base-content/40" />
+                    "Create Account"
                   )}
                 </button>
+              </form>
+
+              <div className="mt-8 text-center">
+                <p className="text-base-content/60">
+                  Already have an account? {" "}
+                  <Link to="/login" className="text-primary hover:underline font-medium">
+                    Sign in
+                  </Link>
+                </p>
               </div>
             </div>
-
-            <button type="submit" className="btn btn-primary w-full" disabled={isSigningUp}>
-              {isSigningUp ? (
-                <>
-                  <Loader2 className="size-5 animate-spin" />
-                  Loading...
-                </>
-              ) : (
-                "Create Account"
-              )}
-            </button>
-          </form>
-
-          <div className="text-center">
-            <p className="text-base-content/60">
-              Already have an account? {" "}
-              <Link to="/login" className="link link-primary">
-                Sign in
-              </Link>
-            </p>
           </div>
         </div>
       </div>
-
-      {/* Right Side - AuthImagePattern */}
-      {/* Right Side - AuthImagePattern */}
-      <div className="hidden lg:flex flex-col items-center justify-center bg-white text-gray-900 p-12 text-center min-h-screen me-5">
-        <h2 className="text-3xl font-bold mb-4">Join Our Community</h2>
-        <p className="text-lg text-gray-600">Connect with friends, share moments, and stay in touch with your loved ones.</p>
-        <div className="mt-8 flex items-center gap-4">
-          <MessageSquare className="size-12 text-gray-900" />
-          <User className="size-12 text-gray-900" />
-          <Mail className="size-12 text-gray-900" />
-        </div>
-      </div>
-
     </div>
   );
 };
