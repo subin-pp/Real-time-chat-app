@@ -37,7 +37,7 @@ const LoginPage = () => {
           <div className="flex-1 text-center lg:text-left space-y-8 max-w-xl">
             <div className="flex items-center justify-center lg:justify-start gap-4">
               <div className="p-3 bg-primary/10 rounded-2xl rotate-6">
-                <MessageSquare className="size-8 text-primary rotate-0" />
+              <Send className="size-8 text-secondary animate-pulse" />
               </div>
               <h1 className="text-4xl font-bold">ChatterBox</h1>
             </div>
